@@ -48,7 +48,6 @@ app.get("/api/persons/:id", (request, response) => {
   }
 });
 
-
 // delete resources
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
@@ -64,13 +63,16 @@ const generateId = () => {
 
 app.post("/api/persons", (request, response) => {
   const body = request.body;
-  // if received data is missing a value for the content property,
-  // server will respond to the request with 400 bad request:
-  // if (!body.name) {
-  //   return response.status(400).json({
-  //     error: "content missing",
-  //   });
-  // }
+  // if name/ number is missing OR name already exists
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: "missing name/number",
+    });
+  } else if (persons.find((person) => person.name === body.name)) {
+    return response.status(400).json({
+      error: "name must be unique",
+    });
+  }
 
   const person = {
     id: generateId(),

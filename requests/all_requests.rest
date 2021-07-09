@@ -26,3 +26,23 @@ content-type: application/json
     "name": "body.name",
     "number": "body.number"
 }
+
+###
+# create a single person (name already exists)
+POST http://localhost:3001/api/persons/
+content-type: application/json
+
+{
+    "name": "Arto Hellas",
+    "number": "body.number"
+}
+
+###
+# create a single person (missing name)
+POST http://localhost:3001/api/persons/
+content-type: application/json
+
+{
+    "name": "",
+    "number": "body.number"
+}
