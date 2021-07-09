@@ -1,1 +1,18 @@
+# fetch all persons
 GET http://localhost:3001/api/persons/
+
+###
+# fetch info
+GET http://localhost:3001/info
+
+###
+# fetch a single person
+GET http://localhost:3001/api/persons/1
+
+###
+# fetch a single person (id not found)
+GET http://localhost:3001/api/persons/5
+
+###
+# delete a single person
+DELETE http://localhost:3001/api/persons/1
