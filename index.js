@@ -57,6 +57,32 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
+// receive data
+const generateId = () => {
+  return Math.floor(Math.random() * 99999);
+};
+
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+  // if received data is missing a value for the content property,
+  // server will respond to the request with 400 bad request:
+  // if (!body.name) {
+  //   return response.status(400).json({
+  //     error: "content missing",
+  //   });
+  // }
+
+  const person = {
+    id: generateId(),
+    name: body.name,
+    number: body.number,
+  };
+
+  persons = persons.concat(person);
+
+  response.json(person);
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -16,3 +16,13 @@ GET http://localhost:3001/api/persons/5
 ###
 # delete a single person
 DELETE http://localhost:3001/api/persons/1
+
+###
+# create a single person
+POST http://localhost:3001/api/persons/
+content-type: application/json
+
+{
+    "name": "body.name",
+    "number": "body.number"
+}
