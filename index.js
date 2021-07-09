@@ -1,7 +1,12 @@
 const express = require("express");
+var morgan = require("morgan");
+
 const app = express();
 
 app.use(express.json());
+
+// morgan middleware
+app.use(morgan("tiny"));
 
 let persons = [
   {
