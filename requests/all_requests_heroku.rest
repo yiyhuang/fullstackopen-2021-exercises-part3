@@ -1,0 +1,48 @@
+# fetch all persons
+GET http://thawing-falls-99174.herokuapp.com/api/persons/
+
+###
+# fetch info
+GET http://thawing-falls-99174.herokuapp.com/info
+
+###
+# fetch a single person
+GET http://thawing-falls-99174.herokuapp.com/api/persons/1
+
+###
+# fetch a single person (id not found)
+GET http://thawing-falls-99174.herokuapp.com/api/persons/5
+
+###
+# delete a single person
+DELETE http://thawing-falls-99174.herokuapp.com/api/persons/1
+
+###
+# create a single person
+POST http://thawing-falls-99174.herokuapp.com/api/persons/
+content-type: application/json
+
+{
+    "name": "body.name",
+    "number": "body.number"
+}
+
+###
+# create a single person (name already exists)
+POST http://thawing-falls-99174.herokuapp.com/api/persons/
+content-type: application/json
+
+{
+    "name": "Arto Hellas",
+    "number": "body.number"
+}
+
+###
+# create a single person (missing name)
+POST http://thawing-falls-99174.herokuapp.com/api/persons/
+content-type: application/json
+
+{
+    "name": "",
+    "number": "body.number"
+}
