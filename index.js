@@ -19,8 +19,8 @@ app.use(
 
 // fetch all persons
 app.get("/api/persons", (request, response) => {
-  Person.find({}).then((person) => {
-    response.json(person);
+  Person.find({}).then((persons) => {
+    response.json(persons);
   });
 });
 
@@ -37,6 +37,10 @@ app.get("/api/persons/:id", (request, response) => {
   Person.findById(request.params.id).then((person) => {
     if (person) {
       response.json(person);
+    } else {
+      return response.status(400).json({
+        error: "id not found",
+      });
     }
   });
 });
@@ -50,33 +54,25 @@ app.get("/api/persons/:id", (request, response) => {
 // });
 
 // receive data
-// const generateId = () => {
-//   return Math.floor(Math.random() * 99999);
-// };
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
 
-// app.post("/api/persons", (request, response) => {
-//   const body = request.body;
-//   // if name/ number is missing OR name already exists
-//   if (!body.name || !body.number) {
-//     return response.status(400).json({
-//       error: "missing name/number",
-//     });
-//   } else if (persons.find((person) => person.name === body.name)) {
-//     return response.status(400).json({
-//       error: "name must be unique",
-//     });
-//   }
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: "missing name/number",
+    });
+  }
 
-//   const person = {
-//     id: generateId(),
-//     name: body.name,
-//     number: body.number,
-//   };
+  const person = new Person({
+    name: body.name,
+    number: body.number,
+  });
 
-//   persons = persons.concat(person);
-
-//   response.json(person);
-// });
+  person.save().then((result) => {
+    console.log(`added ${result.name} ${result.number} to phonebook`);
+    response.json(result);
+  });
+});
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown endpoint" });
