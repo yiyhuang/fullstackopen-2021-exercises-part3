@@ -51,7 +51,7 @@ app.get("/info", (request, response) => {
   });
 });
 
-// fetch a single resource
+// fetch a single person
 app.get("/api/persons/:id", (request, response) => {
   Person.findById(request.params.id).then((person) => {
     if (person) {
@@ -64,7 +64,7 @@ app.get("/api/persons/:id", (request, response) => {
   });
 });
 
-// delete resources
+// delete a person
 app.delete("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
     .then((result) => {
@@ -73,7 +73,7 @@ app.delete("/api/persons/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-// receive data
+// add a new person
 app.post("/api/persons", (request, response) => {
   const body = request.body;
 
@@ -94,6 +94,7 @@ app.post("/api/persons", (request, response) => {
   });
 });
 
+// update a person
 app.put("/api/persons/:id", (request, response, next) => {
   const body = request.body;
 
