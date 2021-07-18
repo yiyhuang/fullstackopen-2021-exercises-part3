@@ -30,7 +30,7 @@ const requestLogger = (request, response, next) => {
 app.use(requestLogger);
 
 // morgan middleware
-morgan.token("type", function (req, res) {
+morgan.token("type", function (req) {
   if (req.method === "POST") return JSON.stringify(req.body);
 });
 app.use(
@@ -68,7 +68,7 @@ app.get("/api/persons/:id", (request, response) => {
 // delete a person
 app.delete("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
-    .then((result) => {
+    .then(() => {
       response.status(204).end();
     })
     .catch((error) => next(error));
