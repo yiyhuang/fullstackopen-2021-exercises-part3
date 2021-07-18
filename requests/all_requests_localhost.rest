@@ -22,10 +22,27 @@ DELETE http://localhost:3001/api/persons/1
 POST http://localhost:3001/api/persons/
 content-type: application/json
 
-{
-    "name": "body.name",
-    "number": "body.number"
-}
+# {
+#     "name": "body.name",
+#     "number": "body.number"
+# }
+
+# { 
+#     "name": "Arto Hellas", 
+#     "number": "040-123456"
+# }
+# { 
+#     "name": "Ada Lovelace", 
+#     "number": "39-44-5323523"
+# }
+# { 
+#     "name": "Dan Abramov", 
+#     "number": "12-43-234345"
+# }
+# { 
+#     "name": "Mary Poppendieck", 
+#     "number": "39-23-6423122"
+# }
 
 ###
 # create a single person (name already exists)

@@ -16,7 +16,7 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).send({ error: "malformatted id" });
   }
   if (error.name === "ValidationError") {
-    return response.status(400).send({ error: "name should be unique" });
+    return response.status(400).json({ error: error.message });
   }
   next(error);
 };
@@ -108,7 +108,10 @@ app.put("/api/persons/:id", (request, response, next) => {
     number: body.number,
   };
 
-  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+  Person.findByIdAndUpdate(request.params.id, person, {
+    new: true,
+    runValidators: true,
+  })
     .then((updatedPerson) => {
       response.json(updatedPerson);
     })
