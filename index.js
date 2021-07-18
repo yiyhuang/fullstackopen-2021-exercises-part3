@@ -4,7 +4,6 @@ const cors = require("cors");
 var morgan = require("morgan");
 require("dotenv").config();
 const Person = require("./models/person");
-
 app.use(express.static("build"));
 app.use(cors());
 app.use(express.json());
