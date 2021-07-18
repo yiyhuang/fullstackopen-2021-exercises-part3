@@ -33,7 +33,7 @@ POST http://localhost:3001/api/persons/
 content-type: application/json
 
 {
-    "name": "Arto Hellas",
+    "name": "Ada Lovelace",
     "number": "body.number"
 }
 

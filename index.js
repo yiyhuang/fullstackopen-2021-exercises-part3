@@ -15,7 +15,9 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" });
   }
-
+  if (error.name === "ValidationError") {
+    return response.status(400).send({ error: "name should be unique" });
+  }
   next(error);
 };
 
@@ -74,7 +76,7 @@ app.delete("/api/persons/:id", (request, response, next) => {
 });
 
 // add a new person
-app.post("/api/persons", (request, response) => {
+app.post("/api/persons", (request, response, next) => {
   const body = request.body;
 
   if (!body.name || !body.number) {
@@ -88,10 +90,13 @@ app.post("/api/persons", (request, response) => {
     number: body.number,
   });
 
-  person.save().then((result) => {
-    console.log(`added ${result.name} ${result.number} to phonebook`);
-    response.json(result);
-  });
+  person
+    .save()
+    .then((result) => {
+      console.log(`added ${result.name} ${result.number} to phonebook`);
+      response.json(result);
+    })
+    .catch((error) => next(error));
 });
 
 // update a person
